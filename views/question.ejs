@@ -9,12 +9,12 @@
       <a href="/" class="btn btn-primary">Home</a>
     </div>
   </div>
-
+  
   <form class="form-control mt-3" method="post" action="/answer">
     <p class="h2">Responda Aqui!</p>
-    <textarea name="body" class="form-control mb-3" style="height: 10rem;"></textarea>
+    <textarea name="body" class="form-control mb-3" style="height: 6rem;" id="resposta"></textarea>
     <input type="hidden" name="question" value="<%= question.id %> ">
-    <input type="submit" value="Enviar resposta" class="btn btn-outline-primary">
+    <input type="submit" value="Enviar resposta" class="btn btn-outline-primary" id="btn-sub">
   </form>
 
   <div class="mt-5">

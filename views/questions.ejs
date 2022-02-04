@@ -2,22 +2,28 @@
 
 
 <div class="container">
-  <%- include('partials/navBar.ejs') %> 
+  <%- include('partials/navBar.ejs') %>  
+
   <form method="POST" action="/receivedquestions">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" name="title" aria-describedby="titleDescribe">
+      <input type="text" class="form-control" id="titulo" name="title" aria-describedby="titleDescribe">
       <div id="titleDescribe" class="form-text">Please, fill in a title for your question.</div>
     </div>
     <div class="mb-3">
       <label for="question" class="form-label">Question</label>
-      <textarea id="question" class="form-control"  name="textArea"></textarea>
+      <textarea id="question" class="form-control"  name="textArea" id="corpo"></textarea>
     </div>
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" id="btn-sub">Submit</button>
   </form>
+  
+    <div class="alert alert-warning mt-3" role="alert">
+      Favor preencher todos os campos!
+    </div>
+    
 </div>
 <%- include('partials/footer.ejs') %> 

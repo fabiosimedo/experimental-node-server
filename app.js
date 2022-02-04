@@ -20,7 +20,8 @@ app.use(express.static('public'));
 
 
 app.get('/', (req,res) => {
-  Questions.findAll({ raw: true, order: [['id', 'DESC']] }).then(question => {
+  Questions.findAll({ raw: true, order: [['id', 'DESC']] })
+  .then(question => {
     res.render('index', { question });
   })
 });
@@ -28,16 +29,21 @@ app.get('/', (req,res) => {
 app.get('/questions', (req,res) => {
   res.render('questions');
 });
-
+  
 app.post('/receivedquestions', (req,res) => {
   const title = req.body.title;
   const question = req.body.textArea;
-  Questions.create({
-    title: title,
-    description: question
-  })
-  .then(() => res.redirect("/"))
-  .catch(e => res.send("Houve um erro ao inserir os dados no banco. " + e.message))
+
+  if(title === '' || question === '') {
+    return res.render('questions');
+  } else {
+    Questions.create({
+      title: title,
+      description: question
+    })
+    .then(() => res.redirect("/"))
+    .catch(e => console.log(e))
+  }
 });
 
 app.get('/question/:id', (req,res) => {
@@ -58,17 +64,21 @@ app.get('/question/:id', (req,res) => {
       res.redirect('/')
     }
   })
-  .catch(e => res.send(`<h1 class="text-warning">Ocorreu um erro ${e.message}<h1>` ))
+  .catch(e => console.log(e))
 })
 
 app.post('/answer', (req, res) => {
-  const body = req.body.body
-  const questionId = req.body.question
-  Answer.create({
-    body: body,
-    questionId: questionId
-  }).then(() => res.redirect(`/question/${questionId}`))
-  .catch(e => res.send(`<h1 class="text-warning">Ocorreu um erro ${e.message}<h1>`))
+  const body = req.body.body;
+  const questionId = req.body.question;
+  if(body === '') { 
+    res.redirect('back');
+  } else {
+    Answer.create({
+      body: body,
+      questionId: questionId
+    }).then(() => res.redirect(`/question/${questionId}`))
+    .catch(e => console.log(e))
+  }
 })
 
 app.listen(4000, (err) => {
