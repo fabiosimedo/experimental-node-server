@@ -1,0 +1,15 @@
+<%- include('partials/head.ejs') %> 
+
+<div class="container">
+  <%- include('partials/navBar.ejs') %> 
+  <h1 class="text-secondary">Home page</h1>
+  <% question.forEach(element => { %>
+    <ul class="list-group mb-4">
+      <li class="list-group-item active" aria-current="true"><%= element.title %> </li>
+      <li class="list-group-item"><a href="/question/<%= element.id %>" class="btn btn-outline-primary">Responda</a></li>
+    </ul>
+  <% }); %>
+</div>
+  
+<%- include('partials/footer.ejs') %> 
+
