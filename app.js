@@ -81,6 +81,12 @@ app.post('/answer', (req, res) => {
   }
 })
 
+
+app.delete('/delete', async (req, res) => {
+  await sequelize.drop();
+  console.log("All tables dropped!");
+})
+
 app.listen(4000, (err) => {
   err ? console.log("Ocorreu um erro") : console.log("Servidor rodando normal");
 });
